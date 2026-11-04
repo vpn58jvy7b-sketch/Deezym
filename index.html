@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d1b">
+<title>DeezyM</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080d1b;color:white;font-family:Arial,sans-serif}
+header{padding:22px 18px;background:#101a30}
+.logo{font-size:29px;font-weight:bold;color:#42a5ff}
+.logo span{color:white}
+header p{color:#aab7ca;margin:6px 0}
+main{padding:18px}
+h2{font-size:21px}
+input{width:100%;padding:14px;border:1px solid #263b5c;border-radius:10px;background:#15233b;color:white;font-size:16px}
+.categories{display:flex;gap:9px;overflow:auto;margin:17px 0}
+.categories button{background:#172944;color:white;border:0;border-radius:20px;padding:10px 15px;white-space:nowrap}
+.categories button.active{background:#1688ed}
+.hero{padding:25px 18px;border-radius:15px;background:linear-gradient(135deg,#123d70,#15152d);margin:18px 0}
+.hero h2{font-size:27px}
+.hero p{color:#d4e4f7;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:#121e33;border-radius:12px;overflow:hidden}
+.poster{height:125px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1c4c79,#34234d);font-size:42px}
+.card h3{font-size:15px;margin:10px}
+.card p{font-size:12px;color:#aab7ca;margin:0 10px 12px}
+footer{text-align:center;color:#8494aa;padding:30px 15px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Deezy<span>M</span> 🎬</div>
+<p>Films, séries, mangas et animés</p>
+</header>
+<main>
+<input id="search" type="search" placeholder="Rechercher un film ou un manga...">
+
+<div class="categories">
+<button class="active" onclick="filter('Tous',this)">Tout</button>
+<button onclick="filter('Films',this)">Films</button>
+<button onclick="filter('Séries',this)">Séries</button>
+<button onclick="filter('Mangas',this)">Mangas</button>
+<button onclick="filter('Animés',this)">Animés</button>
+</div>
+
+<section class="hero">
+<h2>Bienvenue sur DeezyM</h2>
+<p>Découvre un univers de films, séries, mangas et animés.</p>
+</section>
+
+<h2>Explorer le catalogue</h2>
+<div class="grid" id="catalogue">
+<div class="card" data-type="Films"><div class="poster">🎬</div><h3>Films africains</h3><p>Films autorisés à regarder</p></div>
+<div class="card" data-type="Séries"><div class="poster">📺</div><h3>Séries</h3><p>Découvre des séries</p></div>
+<div class="card" data-type="Mangas"><div class="poster">📚</div><h3>Mangas</h3><p>Explore les mangas</p></div>
+<div class="card" data-type="Animés"><div class="poster">🌸</div><h3>Animés</h3><p>Découvre les animés</p></div>
+</div>
+</main>
+<footer>© 2026 DeezyM — Les contenus doivent être autorisés à la diffusion.</footer>
+
+<script>
+function filter(type,button){
+document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));
+button.classList.add('active');
+document.querySelectorAll('.card').forEach(card=>{
+card.style.display=(type==='Tous'||card.dataset.type===type)?'block':'none';
+});
+}
+document.getElementById('search').addEventListener('input',function(){
+let q=this.value.toLowerCase();
+document.querySelectorAll('.card').forEach(card=>{
+card.style.display=card.innerText.toLowerCase().includes(q)?'block':'none';
+});
+});
+</script>
+</body>
+</html>
